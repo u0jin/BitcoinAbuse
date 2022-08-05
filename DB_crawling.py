@@ -14,12 +14,11 @@ def DB():
         urlretrieve(url, "./BC_DB.csv")
 
 
-#schedule.every().thursday.at("17:50").do(DB)
 
 def backgroundScheduler():
-    scheduler = BackgroundScheduler(timezone='Asia/Seoul')
-    scheduler.start()
+    scheduler = BlockingScheduler(timezone='Asia/Seoul')
     scheduler.add_job(DB, 'cron', hour=20)
+    scheduler.start()
 
 if __name__ == '__main__':
     backgroundScheduler()
